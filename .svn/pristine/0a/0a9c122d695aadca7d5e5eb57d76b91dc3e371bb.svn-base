@@ -1,0 +1,88 @@
+package com.yangyujuan.lucene;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import org.apache.lucene.analysis.Analyzer; 
+import org.apache.lucene.analysis.standard.StandardAnalyzer; 
+import org.apache.lucene.document.Document; 
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.jsoup.Jsoup;
+
+import com.yangyujuan.jdbc.dao.DaoFactory;
+import com.yangyujuan.jdbc.dao.NewsDao;
+import com.yangyujuan.jdbc.dao.NewsFilter;
+import com.yangyujuan.jdbc.domain.News;
+import com.yangyujuan.util.PropertiesUtil;
+
+public class LuceneService {
+
+	public void createIndex() throws IOException {
+		 IndexWriter writer = null;  
+	        try {  
+	        	String indexPath = PropertiesUtil.get("indexPath");
+	            // Directory directory = new RAMDirectory();  
+	            Directory directory = FSDirectory  
+	                    .open(Paths.get(indexPath));  
+	            Analyzer analyzer = new StandardAnalyzer();  
+	            IndexWriterConfig iwc = new IndexWriterConfig(analyzer);  
+	  
+	            writer = new IndexWriter(directory, iwc);  
+	            Document document = null;  
+	            
+	            NewsDao newsDao = DaoFactory.getInstance().getUserDao();
+	    		ArrayList<News> list = newsDao.getAllNewsList();
+	    		int i = 0;
+	    		for(News news : list){
+	    			if(!NewsFilter.isRightIndex(news)){
+	    				continue;
+	    			}
+	    			System.out.println("title:" + news.getTitle());  
+	                document = new Document();  
+	                document.add(new StringField("title", news.getTitle(), Field.Store.YES));
+	                document.add(new StringField("source", news.getSource(), Field.Store.YES));  
+	                document.add(new StringField("path", news.getPubTime(), Field.Store.YES));
+	                //由于正文是带html标签的字符串，所有用Jsoup去掉标签
+	                document.add(new TextField("bodytext", Jsoup.parse(news.getBodytext()).text(), Field.Store.YES));
+	                writer.addDocument(document);  
+	    		}
+	        } catch (IOException e) {  
+	            // TODO Auto-generated catch block  
+	            e.printStackTrace();  
+	        } finally {  
+	            if (writer != null) {  
+	                try {  
+	                    writer.close();  
+	                } catch (IOException e) {  
+	                    // TODO Auto-generated catch block  
+	                    e.printStackTrace();  
+	                }  
+	            }  
+	        } 
+	}
+	
+	
+	public void commitRamIndex() {
+		
+	}
+	public void commitDBIndex() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void updateReconstructorIndex() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void deleteIndex() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

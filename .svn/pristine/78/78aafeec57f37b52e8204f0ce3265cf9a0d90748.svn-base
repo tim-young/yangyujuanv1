@@ -1,0 +1,11 @@
+package com.yangyujuan.lucene;
+
+import java.io.IOException;
+
+public class Lucenetest {
+
+	public static void main(String args[]) throws IOException{
+		LuceneService luceneservice = new LuceneService();
+		luceneservice.createIndex();
+	}
+}

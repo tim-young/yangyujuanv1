@@ -1,0 +1,21 @@
+package com.yangyujuan.lucene;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.lucene.queryparser.classic.ParseException;
+
+import com.yangyujuan.jdbc.domain.News;
+
+public class Lucenetest {
+
+	public static void main(String args[]) throws IOException, ParseException{
+		LuceneService luceneservice = new LuceneService();
+//		luceneservice.createIndex();
+//		ArrayList<News> listnews = luceneservice.search("银行");
+//		for(News model:listnews){
+//			System.out.println(model.toString());
+//		}
+		luceneservice.getIndexMate();
+	}
+}

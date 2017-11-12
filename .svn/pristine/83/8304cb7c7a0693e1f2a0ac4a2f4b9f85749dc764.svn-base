@@ -1,0 +1,27 @@
+    .item {
+        padding: 33px 0 20px;
+        position: relative;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    
+    .other{
+    	width:152px;
+    	height:21px;
+    	margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 80%;
+		vertical-align: baseline;
+    }
+    
+    .footer-right{
+    	position: absolute;
+		right: 0;
+		display: inline-block;
+		*display: inline;
+		*zoom: 1;
+		height: 21px;
+		line-height: 21px;
+		font-size: 80%;
+    	margin-top: 7px;
+    }

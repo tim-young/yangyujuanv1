@@ -1,0 +1,72 @@
+package com.yangyujuan.jdbc.dao.impl;
+
+
+import java.util.ArrayList;
+
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
+import com.yangyujuan.jdbc.dao.NewsDao;
+import com.yangyujuan.jdbc.JdbcUtils;
+import com.yangyujuan.jdbc.domain.News;
+
+public class NewsDaoSpringImpl implements NewsDao {
+	private SimpleJdbcTemplate simpleJdbcTemplate = new SimpleJdbcTemplate(
+			JdbcUtils.getDataSource());
+
+	private static final int PAGESIZE = 10;
+	
+	@Override
+	public void delete(News news) {
+		String sql = "delete from news where id=?";
+		this.simpleJdbcTemplate.update(sql, news.getId());
+	}
+	
+	@Override
+	public void update(News news) {
+		String sql = "update user set title=:title, bodytext=:bodytext, source=:source,pubTime=:pubTime where id=:id ";
+		this.simpleJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(news));
+	}
+
+	@Override
+	public void addNews(News news) {
+		String sql = "insert into News (title,bodytext,source,pubTime) values (:title,:bodytext,:source,:pubTime)";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(news);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		this.simpleJdbcTemplate.getNamedParameterJdbcOperations().update(sql,
+				param, keyHolder);
+		news.setId(keyHolder.getKey().intValue());
+	}
+
+	@Override
+	public News getNews(int userId) {
+		String sql = "select id, title,bodytext,source,pubTime,visits  from News where id=?";
+		return this.simpleJdbcTemplate.queryForObject(sql,
+				ParameterizedBeanPropertyRowMapper.newInstance(News.class),
+				userId);
+	}
+
+	@Override
+	public ArrayList<News> getNewsList(int pageNum) {
+		int num1 = pageNum*PAGESIZE;
+		int num2 = (pageNum-1)*PAGESIZE+1;
+		String sql = "SELECT TOP " + PAGESIZE + " * FROM "+
+	"( SELECT TOP ("+num1+") ROW_NUMBER() OVER (ORDER BY pubTime DESC) AS RowNum, * FROM News ) AS tempTable " + 
+				" WHERE RowNum BETWEEN " + num2 + " AND "+num1 +" ORDER BY RowNum";
+		ArrayList<News> newsList = new ArrayList<News>();
+		newsList = (ArrayList<News>) this.simpleJdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(News.class));
+		return newsList;
+	}
+
+	@Override
+	public int getTableCount(){
+		String sql = "SELECT COUNT(*) FROM News";
+		int iTableCount = this.simpleJdbcTemplate.queryForInt(sql);
+		return iTableCount;
+	}
+
+}

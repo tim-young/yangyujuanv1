@@ -1,0 +1,54 @@
+package com.yangyujuan.jdbc.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.yangyujuan.jdbc.domain.News;
+
+public class NewsDaoTest {
+	public static void main(String[] args) {
+		NewsDao newsDao = DaoFactory.getInstance().getUserDao();
+		
+		ArrayList<News> list = newsDao.getNewsList(45);
+		int i = 0;
+		for(News news : list){
+			System.out.println("##########################"+ i++);
+			System.out.println(news);
+		}
+		// UserDao userDao = new UserDaoJdbcImpl();
+		// System.out.println(userDao);
+		//		
+//		News news = new News();
+//		 news.setBodytext("bodytest杨");
+//	        news.setPubTime("2015-07-12");
+//	        news.setSource("yangding杨");
+//	        news.setTitle("biaoti");
+//	        news.setVisits(100);
+//		 news.setBodytext("这些举措不可能凭空发生例如任何程度的变化都会遏制");
+//	        news.setPubTime("2015年08月29日 07:10");
+//	        news.setSource("凤凰国际iMarkets");
+//	        news.setTitle("这些举措不可能凭空发生");
+//		news.setPubTime(new java.sql.Date(new Date().getTime()));
+		
+//		newsDao.addNews(news);
+//		System.out.println(newsDao.getNews(1));
+		
+
+		// userDao.addUser(user);
+		// System.out.println(user.getId());
+
+//		User u = userDao.findUser(user.getName(), null);
+//		System.out.println(u.getId());
+//
+//		u = userDao.getUser(1);
+//		u.setMoney(20000.1f);
+//		userDao.update(u);
+
+		// User u1 = userDao.getUser(8);
+		// userDao.delete(u1);
+
+		// UserDaoImpl udi = new UserDaoImpl();
+		// User u1 = udi.findUser(user.getName(), null);
+
+	}
+}
