@@ -1,0 +1,68 @@
+##IntelliJ IDEA project files and directories
+#*.iml
+#*.ipr
+#*.iws
+#/.idea
+#
+##KDevelop project file and directory
+#.kdev4/
+#*.kdev4
+##Build targets
+#/target
+#*/target
+##Report directories
+#/reports
+#*/reports
+#
+##Mac-specific directory that no other operating system needs.
+#.DS_Store
+#
+##Scala-play project files
+#logs
+#project/project
+#project/target
+#target
+#tmp
+#.history
+#dist
+#/*.iml
+#/out
+#/.idea_modules
+#/.classpath
+#/.project
+#/RUNNING_PID
+#/.settings
+#*.log*
+#*/*.log*
+#dep.txt
+#*.rdb
+#
+#application-local.*
+#*.class
+#
+## Package Files #
+#*.jar
+#*.war
+#*.ear
+#
+## virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+#*.log
+#trade.iml
+#trade.ipr
+#trade.iws
+#
+## .gitignore for maven
+#target/
+#pom.xml.tag
+#pom.xml.releaseBackup
+#pom.xml.versionsBackup
+#pom.xml.next
+#release.properties
+#dependency-reduced-pom.xml
+#buildNumber.properties
+#.mvn/timing.properties
+#/xuekelindun_notes
+#
+#
+##.gitignore
+#src/test/

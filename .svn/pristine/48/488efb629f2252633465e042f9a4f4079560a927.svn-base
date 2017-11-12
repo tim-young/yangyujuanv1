@@ -1,5 +1,0 @@
-#userDaoClass=cn.itcast.jdbc.dao.impl.UserDaoJdbcImpl
-newsDaoClass=com.yangyujuan.jdbc.dao.impl.NewsDaoSpringImpl
-#userDaoClass=cn.itcast.jdbc.dao.impl.UserDaoHibernateImpl
-#key=value
-#key1=value1
