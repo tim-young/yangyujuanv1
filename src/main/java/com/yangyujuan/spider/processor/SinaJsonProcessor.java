@@ -60,7 +60,7 @@ public class SinaJsonProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new SinaJsonProcessor()).addUrl("http://feed.mix.sina.com.cn/api/roll/get?pageid=155&lid=1686&num=50&page=1")
+        Spider.create(new SinaJsonProcessor()).addUrl("http://feed.mix.sina.com.cn/api/roll/get?pageid=155&lid=1686&num=50&page=3")
         .addPipeline(new NewsDaoPipeline()).addPipeline(new ConsolePipeline()).run();
     }
 }

@@ -48,7 +48,7 @@ public class FengHuangProcessor implements PageProcessor {
 //             .addPipeline(new ConsolePipeline()).run();
     	//http://finance.ifeng.com/
     	//http://finance.ifeng.com/cmppdyn/756/665/1/dynlist.html
-    	 Spider.create(new FengHuangProcessor()).addUrl("http://finance.ifeng.com/cmppdyn/756/665/1/dynlist.html")
+    	 Spider.create(new FengHuangProcessor()).addUrl("http://finance.ifeng.com")
     	 .addPipeline(new NewsDaoPipeline()).run();
     }
 }
