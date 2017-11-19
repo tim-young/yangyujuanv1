@@ -67,9 +67,11 @@ public class NewsDaoSpringImpl implements NewsDao {
 	public ArrayList<News> getNewsList(int pageNum) {
 		int num1 = pageNum*PAGESIZE;
 		int num2 = (pageNum-1)*PAGESIZE+1;
-		String sql = "SELECT TOP " + PAGESIZE + " * FROM "+
-	"( SELECT TOP ("+num1+") ROW_NUMBER() OVER (ORDER BY pubTime DESC) AS RowNum, * FROM News ) AS tempTable " + 
-				" WHERE RowNum BETWEEN " + num2 + " AND "+num1 +" ORDER BY RowNum";
+		String sql = "select * from News limit " + (pageNum-1) * PAGESIZE+","+PAGESIZE;
+
+//		String sql = "SELECT TOP " + PAGESIZE + " * FROM "+
+//	"( SELECT TOP ("+num1+") ROW_NUMBER() OVER (ORDER BY pubTime DESC) AS RowNum, * FROM News ) AS tempTable " +
+//				" WHERE RowNum BETWEEN " + num2 + " AND "+num1 +" ORDER BY RowNum";
 		ArrayList<News> newsList = new ArrayList<News>();
 		newsList = (ArrayList<News>) this.simpleJdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(News.class));
 		return newsList;

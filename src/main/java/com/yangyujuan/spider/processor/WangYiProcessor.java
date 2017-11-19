@@ -18,14 +18,22 @@ public class WangYiProcessor implements PageProcessor {
     private NewsFilter newsFilter = new NewsFilter();
     @Override
     public void process(Page page) {
-        List<String> links = page.getHtml().links().regex("http://money\\.163\\.com/15/\\d{4}/\\d{2}/\\S{16}\\.html").all();
+        List<String> links = page.getHtml().links().regex("http://money\\.163\\.com/\\d{2}/\\d{4}/\\d{2}/\\S{16}\\.html").all();
         page.addTargetRequests(links);
         News news = new News();
        // js_selection_area
         news.setBodytext(page.getHtml().xpath("//div[@id='endText']").toString());
-        news.setPubTime(page.getHtml().xpath("//div[@class='ep-time-soure cDGray']/text()").toString());
+        String pubTime = page.getHtml().xpath("//div[@class='post_time_source']/text()").toString();
+        System.out.println(pubTime);
+        if(pubTime != null){
+            pubTime=pubTime.trim().substring(0, 19);
+            System.out.println(pubTime);
+            news.setPubTime(pubTime);
+        }
+       //news.setPubTime(page.getHtml().xpath("//div[@class='post_time_source']/text()").toString().trim().substring(0,19));
         news.setSource(page.getHtml().xpath("//a[@id='ne_article_source']/text()").toString());
         news.setTitle(page.getHtml().xpath("//title/text()").toString());
+        System.out.println(news);
         if (!newsFilter.isRightNews(news)) {
             //skip this page
             page.setSkip(true);
