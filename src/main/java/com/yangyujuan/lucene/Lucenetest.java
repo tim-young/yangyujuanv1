@@ -13,6 +13,7 @@ public class Lucenetest {
 
 	public static void main(String args[]) throws IOException, ParseException{
 		LuceneService luceneservice = new LuceneService();
+		luceneservice.getHotWordJson();
 //		luceneservice.createIndex();
 //		ArrayList<ViewNews> listnews;
 //		try {
@@ -26,6 +27,6 @@ public class Lucenetest {
 //		}
 		
 //		luceneservice.getIndexMate();
-		luceneservice.getIDF();
+//		luceneservice.getIDF();
 	}
 }

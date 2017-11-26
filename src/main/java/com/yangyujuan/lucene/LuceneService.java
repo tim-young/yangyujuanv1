@@ -403,7 +403,7 @@ public class LuceneService {
 //                    	termlist.add(term);
 //                		count++;
 //                    }
-                	if(tn.totalTermFreq()>12&& idf>3.3000 && idf < 4.0000 &&(!text.utf8ToString().matches("^[a-zA-Z]*"))&&text.utf8ToString().length()>1){
+                	if(tn.totalTermFreq()>10&& idf>1.8000 && idf < 4.0000 &&(!text.utf8ToString().matches("^[a-zA-Z]*"))&&text.utf8ToString().length()>1){
                 		HashMap<String,Object> term = new HashMap<String,Object>();
                 		System.out.println(text.utf8ToString() + " ： idf= " + idf  + "  ;fre =" + tn.totalTermFreq());
                     	term.put("name", text.utf8ToString());

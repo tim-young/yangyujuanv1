@@ -12,6 +12,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 
 public class WangYiProcessor implements PageProcessor {
     private Site site = Site.me().setDomain("money.163.com");
@@ -51,6 +52,6 @@ public class WangYiProcessor implements PageProcessor {
 //        Spider.create(new OschinaBlogPageProcesser()).addUrl("http://my.oschina.net/flashsword/blog")
 //             .addPipeline(new ConsolePipeline()).run();
     	 Spider.create(new WangYiProcessor()).addUrl("http://money.163.com/special/00252G50/macro.html")
-    	 .addPipeline(new NewsDaoPipeline()).run();
+    	 .addPipeline(new NewsDaoPipeline()).setScheduler(new FileCacheQueueScheduler("D:\\project\\urllist")).run();
     }
 }
