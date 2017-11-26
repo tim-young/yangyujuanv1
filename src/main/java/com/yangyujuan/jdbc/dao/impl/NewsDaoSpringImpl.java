@@ -67,7 +67,7 @@ public class NewsDaoSpringImpl implements NewsDao {
 	public ArrayList<News> getNewsList(int pageNum) {
 		int num1 = pageNum*PAGESIZE;
 		int num2 = (pageNum-1)*PAGESIZE+1;
-		String sql = "select * from News limit " + (pageNum-1) * PAGESIZE+","+PAGESIZE;
+		String sql = "select * from News order by pubTime desc limit " + (pageNum-1) * PAGESIZE+","+PAGESIZE;
 
 //		String sql = "SELECT TOP " + PAGESIZE + " * FROM "+
 //	"( SELECT TOP ("+num1+") ROW_NUMBER() OVER (ORDER BY pubTime DESC) AS RowNum, * FROM News ) AS tempTable " +
