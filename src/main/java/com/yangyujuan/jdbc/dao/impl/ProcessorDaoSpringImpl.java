@@ -73,7 +73,7 @@ public class ProcessorDaoSpringImpl implements ProcessorDao {
 	public List<Processor> getList(int pageNum) {
 		int num1 = pageNum*PAGESIZE;
 		int num2 = (pageNum-1)*PAGESIZE+1;
-		String sql = "select * from News limit " + (pageNum-1) * PAGESIZE+","+PAGESIZE;
+		String sql = "select * from Processor limit " + (pageNum-1) * PAGESIZE+","+PAGESIZE;
 		ArrayList<Processor> objList = new ArrayList<Processor>();
 		objList = (ArrayList<Processor>) this.simpleJdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(Processor.class));
 		return objList;
