@@ -22,7 +22,6 @@ public class NewsDaoPipeline implements Pipeline{
 	public void process(ResultItems resultItems, Task task) {
 		News news = (News)resultItems.get("news");
 		System.out.println("news: "+ news);
-		
 		String strNewTime = news.getPubTime();
 		Matcher matcher = pattern.matcher(news.getPubTime());
         String all = matcher.replaceAll("");

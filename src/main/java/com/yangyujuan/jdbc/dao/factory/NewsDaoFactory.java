@@ -12,6 +12,7 @@ public class NewsDaoFactory {
 	private NewsDaoFactory() {
 		try {
 			Properties prop = new Properties();
+			//双亲委派模型，获取类加载器，获取资源
 			InputStream inStream = NewsDaoFactory.class.getClassLoader()
 					.getResourceAsStream("daoconfig.properties");
 			prop.load(inStream);
